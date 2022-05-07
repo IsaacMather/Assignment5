@@ -1,0 +1,14 @@
+#the __eq__ function, compares the strings of the keyword entry object.
+
+#we dig in to the keyword entry object and look for the word it contains.
+
+#all of the oerloaded comparison operators and the hash function is in the one
+class
+
+#for the gt and lt, are we comparing the words as strings? or what are we
+comparing?
+
+#what do we need to do for hash?
+
+#for find, do we want to return the dictionary of url's and locations in the
+url, or what do we want to return?
