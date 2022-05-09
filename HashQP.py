@@ -75,13 +75,17 @@ class HashQP:
         bucket = self._find_pos(data)
         return self._buckets[bucket]._state == HashEntry.State.ACTIVE
 
+        #can just use find, and return true or false instead of an object
+
     #is this the correct implementation of the find method? #nah it needs
     # the overloaded __eq__ operator from KeywordEntry, because that's what
     # we're gonna be using for line 84 here (cuz it needs strings, plus data_
     def find(self, data):
+        data = data.upper()
         bucket = self._find_pos(data)
+        #do i need to access the data item of the HashEntry class?
         if self._buckets[bucket]._state == HashEntry.State.ACTIVE and \
-                self._buckets[bucket]._word == data:
+                self._buckets[bucket]._data == data:
             return self._buckets[bucket] #i think here we're returning the
             # whole object, because the example test code shows us calling
             # the .sites property on the returned object of the .find()

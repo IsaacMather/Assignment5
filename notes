@@ -8,7 +8,7 @@ class
 #for the gt and lt, are we comparing the words as strings? or what are we
 comparing?
 
-#what do we need to do for hash?
+#what do we need to do for hash? are we calling has on self._word and returning
+ that?
 
-#for find, do we want to return the dictionary of url's and locations in the
-url, or what do we want to return?
+#for find, do we want to return the entire KeywordEntry object?

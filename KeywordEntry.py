@@ -26,10 +26,26 @@ class KeywordEntry:
     #are greater than and less than overloaded string comparison operators?
 
     def __lt__(self, other):
-        pass
+        if isinstance(other, str):
+            other = other.upper()
+            return self._word < other
+
+        elif isinstance(other, KeywordEntry):
+            return self._word < other._word
+
+        else:
+            print("Error, incorrect data type passed to __lt__")
 
     def __gt__(self, other):
-        pass
+        if isinstance(other, str):
+            other = other.upper()
+            return self._word > other
+
+        elif isinstance(other, KeywordEntry):
+            return self._word > other._word
+
+        else:
+            print("Error, incorrect data type passed to __gt__")
 
     def __eq__(self, other):
         if isinstance(other, str):
@@ -37,10 +53,13 @@ class KeywordEntry:
             return self._word == other
 
         elif isinstance(other, KeywordEntry):
-            self._word == other._word
+            return self._word == other._word
+
+        else:
+            print("Error, incorrect data type passed to __eq__")
 
     def __hash__(self):
-        pass
+        return hash(self._word)
 
 
     #The comparison functions will be acting on strings, a we will sort and
