@@ -84,9 +84,9 @@ class HashQP:
         data = data.upper()
         bucket = self._find_pos(data)
         #do i need to access the data item of the HashEntry class?
-        if self._buckets[bucket]._state == HashEntry.State.ACTIVE and \
-                self._buckets[bucket]._data == data:
-            return self._buckets[bucket] #i think here we're returning the
+        if self._buckets[bucket]._state == HashEntry.State.ACTIVE and self._buckets[bucket]._data == data:
+            return self._buckets[bucket]._data #i think here we're returning
+            # the
             # whole object, because the example test code shows us calling
             # the .sites property on the returned object of the .find()
             # method, so i assume it's the KeywordEntry object being returned
@@ -94,10 +94,13 @@ class HashQP:
             raise HashQP.NotFoundError
 
     def remove(self, data):
+        data = data.upper()
         bucket = self._find_pos(data)
         if self._buckets[bucket]._state != HashEntry.State.ACTIVE:
+            # f'did not remove {self._buckets[bucket]._data._word}'
             return False
         else:
+            print(f'successfully removed {self._buckets[bucket]._data._word}')
             self._buckets[bucket]._state = HashEntry.State.DELETED
             self._size -= 1
             return True

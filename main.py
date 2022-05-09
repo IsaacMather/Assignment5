@@ -4,11 +4,10 @@ from Employee import Employee
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    my_hash_table = HashQP()
-    obj_one = KeywordEntry("one", "foothill.edu", 4)
-    obj_two = KeywordEntry("two", "foothill.edu", 5)
-    obj_three = KeywordEntry("as", "foothill.edu", 6)
+    # Instantiate a HashQP object.
+    my_hash_table: HashQP = HashQP()
 
+    # Create at least ten KeywordEntry objects and load them in to your hash table.
     keyword_entry_list = [
         KeywordEntry("one", "foothill.edu", 4),
         KeywordEntry("as", "foothillcollege.instructure.com/", 1),
@@ -20,19 +19,15 @@ if __name__ == '__main__':
         KeywordEntry("have", "foothill.edu", 3),
         KeywordEntry("valid", "foothill.edu", 8),
         KeywordEntry("comparison", "foothill.edu", 9),
-
     ]
+
     for keyword_entry in keyword_entry_list:
         my_hash_table.insert(keyword_entry)
 
-    #running find on key words that are loaded in to the HashQP should
-    # return a list. Are we returning a list?
-
+    # Run find() on each key to make sure they can all be found.  Make sure case doesn't matter, so using the example above, both of these calls:
     my_hash_table.find("ONE")
-    my_hash_table.find("as")
     my_hash_table.find("aS")
     my_hash_table.find("wriTTen")
-    my_hash_table.find("the")
     my_hash_table.find("tHE")
     my_hash_table.find("class")
     my_hash_table.find("does")
@@ -44,18 +39,69 @@ if __name__ == '__main__':
     #run find on some keys that you did not load, to ensure that an
     # exception is raised.
 
-    #lets put these in a try/except block
-    my_hash_table.find("computer")
-    my_hash_table.find("tree")
+    try:
+        my_hash_table.find("computer")
+    except HashQP.NotFoundError:
+        print("Successfully did not find computer")
 
-    # Remove all but one of the nodes and run find() on the remaining node and a
-    # removed node, verifying that you get the correct behavior.
+    try:
+        my_hash_table.find("tree")
+    except HashQP.NotFoundError:
+        print("Successfully did not find tree")
+
+
+    # Remove all but one of the nodes and run find() on the remaining node
+    my_hash_table.remove("ONE")
+    my_hash_table.remove("aS")
+    my_hash_table.remove("wriTTen")
+    my_hash_table.remove("the")
+    my_hash_table.remove("tHE")
+    my_hash_table.remove("class")
+    my_hash_table.remove("does")
+    my_hash_table.remove("nOt")
+    my_hash_table.remove("have")
+    my_hash_table.remove("valId")
+
+    # Remove all but one of the nodes and run find() on the remaining node and
+    # a removed node, verifying that you get the correct behavior.
+    if my_hash_table.find("comparison"):
+        print('successfully found comparison')
+    else:
+        print('Did not find comparison')
+
+    try:
+        my_hash_table.find("oNe")
+    except HashQP.NotFoundError:
+        print("Successfully did not find oNe")
+
+    try:
+        my_hash_table.find("HaVe")
+        print('oops found have')
+    except HashQP.NotFoundError:
+        print("Successfully did not find HaVe")
+
 
     #remove the final node and check again
+    my_hash_table.remove('comparison')
+
+
+    # after removing all but one removed node, run find on a removed
+    # node verifying that you get the correct behavior.
+    try:
+        my_hash_table.find("COMPARISON")
+        print('oops found comparison')
+    except HashQP.NotFoundError:
+        print("Successfully did not find comparison")
+
+
+
+
+
+
+
 
     #anything else you can thing of!
 
-    #add doc strings and commentary, emulate that example code!
 
 
 
