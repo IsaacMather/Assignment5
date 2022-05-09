@@ -4,6 +4,12 @@ from enum import Enum
 
 
 class HashEntry:
+    """Used to store data, and store the state of the data in the Hash Table
+
+        Args:
+            data (): any object which has active or overloaded comparison
+            operators
+    """
     class State(Enum):
         ACTIVE = 0
         EMPTY = 1
@@ -15,6 +21,11 @@ class HashEntry:
 
 
 class HashQP:
+    """Quadratic probing hash table that stores HashEntry objects
+
+        Args:
+            table_size (int): initial size of the table
+    """
     class NotFoundError(Exception):
         pass
 
@@ -36,7 +47,6 @@ class HashQP:
         return hash(item) % self._table_size
 
     def _next_prime(self, floor):
-        # loop doesn't work for 2 or 3
         if floor <= 2:
             return 2
         elif floor == 3:
@@ -47,10 +57,8 @@ class HashQP:
             candidate = floor
 
         while True:
-            # we know candidate is odd.  check for divisibility by 3
             if candidate % 3 != 0:
                 loop_lim = int((math.sqrt(candidate) + 1) / 6)
-                # now we can check for divisibility by 6k +/- 1 up to sqrt
                 for k in range(1, loop_lim + 1):
                     if candidate % (6 * k - 1) == 0:
                         break
@@ -75,21 +83,13 @@ class HashQP:
         bucket = self._find_pos(data)
         return self._buckets[bucket]._state == HashEntry.State.ACTIVE
 
-        #can just use find, and return true or false instead of an object
-
-    #is this the correct implementation of the find method? #nah it needs
-    # the overloaded __eq__ operator from KeywordEntry, because that's what
-    # we're gonna be using for line 84 here (cuz it needs strings, plus data_
     def find(self, data):
         data = data.upper()
         bucket = self._find_pos(data)
-        #do i need to access the data item of the HashEntry class?
-        if self._buckets[bucket]._state == HashEntry.State.ACTIVE and self._buckets[bucket]._data == data:
-            return self._buckets[bucket]._data #i think here we're returning
-            # the
-            # whole object, because the example test code shows us calling
-            # the .sites property on the returned object of the .find()
-            # method, so i assume it's the KeywordEntry object being returned
+        if self._buckets[bucket]._state == HashEntry.State.ACTIVE and \
+                self._buckets[bucket]._data == data:
+            print(f'successfully found {data}')
+            return self._buckets[bucket]._data
         else:
             raise HashQP.NotFoundError
 
@@ -97,7 +97,6 @@ class HashQP:
         data = data.upper()
         bucket = self._find_pos(data)
         if self._buckets[bucket]._state != HashEntry.State.ACTIVE:
-            # f'did not remove {self._buckets[bucket]._data._word}'
             return False
         else:
             print(f'successfully removed {self._buckets[bucket]._data._word}')
@@ -116,6 +115,7 @@ class HashQP:
         self._size += 1
         if self._load_size > self._max_lambda * self._table_size:
             self._rehash()
+        print(f' Successfully inserted {data._word}')
         return True
 
     def _rehash(self):

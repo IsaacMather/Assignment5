@@ -7,7 +7,8 @@ if __name__ == '__main__':
     # Instantiate a HashQP object.
     my_hash_table: HashQP = HashQP()
 
-    # Create at least ten KeywordEntry objects and load them in to your hash table.
+    print('Create at least ten KeywordEntry objects and load them in to your '
+          'hash table.')
     keyword_entry_list = [
         KeywordEntry("one", "foothill.edu", 4),
         KeywordEntry("as", "foothillcollege.instructure.com/", 1),
@@ -24,7 +25,9 @@ if __name__ == '__main__':
     for keyword_entry in keyword_entry_list:
         my_hash_table.insert(keyword_entry)
 
-    # Run find() on each key to make sure they can all be found.  Make sure case doesn't matter, so using the example above, both of these calls:
+    print("\nRun find() on each key to make sure they can all be found.  Make "
+          "sure ase doesnt matter, so using the example above, both of these "
+          "calls:")
     my_hash_table.find("ONE")
     my_hash_table.find("aS")
     my_hash_table.find("wriTTen")
@@ -36,9 +39,9 @@ if __name__ == '__main__':
     my_hash_table.find("valid")
     my_hash_table.find("comparison")
 
-    #run find on some keys that you did not load, to ensure that an
-    # exception is raised.
 
+    print('\nRun find on some keys that you did not load, to ensure that an '
+          'exception is raised.')
     try:
         my_hash_table.find("computer")
     except HashQP.NotFoundError:
@@ -49,8 +52,7 @@ if __name__ == '__main__':
     except HashQP.NotFoundError:
         print("Successfully did not find tree")
 
-
-    # Remove all but one of the nodes and run find() on the remaining node
+    print('\nRemove all but one of the nodes')
     my_hash_table.remove("ONE")
     my_hash_table.remove("aS")
     my_hash_table.remove("wriTTen")
@@ -62,8 +64,9 @@ if __name__ == '__main__':
     my_hash_table.remove("have")
     my_hash_table.remove("valId")
 
-    # Remove all but one of the nodes and run find() on the remaining node and
-    # a removed node, verifying that you get the correct behavior.
+    print('\nRun find() on the remaining '
+          'node and a removed node, verifying that you get the correct '
+          'behavior.')
     if my_hash_table.find("comparison"):
         print('successfully found comparison')
     else:
@@ -80,13 +83,11 @@ if __name__ == '__main__':
     except HashQP.NotFoundError:
         print("Successfully did not find HaVe")
 
-
-    #remove the final node and check again
+    print('\nRemove the final node and check again')
     my_hash_table.remove('comparison')
 
-
-    # after removing all but one removed node, run find on a removed
-    # node verifying that you get the correct behavior.
+    print('\nAfter removing all but one removed node, run find on a removed '
+          'node verifying that you get the correct behavior.')
     try:
         my_hash_table.find("COMPARISON")
         print('oops found comparison')

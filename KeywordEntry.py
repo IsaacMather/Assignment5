@@ -1,4 +1,11 @@
 class KeywordEntry:
+    """Stores information about a specific word on a webpage
+
+        Args:
+            word (str): the word we're storing info about
+            url (str): the url the word is located on
+            location (int): location, where the word is on the page
+    """
 
     def __init__(self, word: str, url: str = None, location: int = None):
         self._word = word.upper()
@@ -22,8 +29,6 @@ class KeywordEntry:
     @property
     def sites(self) -> list:
         return [key for key in self._sites]
-
-    #are greater than and less than overloaded string comparison operators?
 
     def __lt__(self, other):
         if isinstance(other, str):
@@ -60,12 +65,3 @@ class KeywordEntry:
 
     def __hash__(self):
         return hash(self._word)
-
-
-    #The comparison functions will be acting on strings, a we will sort and
-    # hash on self._word. The comparison functions should allow a
-    # KeywordEntry object to be compared to either another KeywordEntry
-    # object (using self._word for comparison) or a string (again compring
-    # the string to self._word). When implemeting the string comparison,
-    # remember that self_word has been converted to uppercase, so the string
-    # on the right side of the comparison needs to be converted as well.
